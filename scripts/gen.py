@@ -16,18 +16,20 @@ def resolve(v, depth=0):
         node = node[part]
     return resolve(node["value"] if isinstance(node, dict) else node, depth + 1)
 
+SKIP_KEYS = {"meta", "note", "rule"}  # prose fields never become CSS vars
+
 def flatten(prefix, node, out):
     for k, v in node.items():
-        if k in ("meta",): continue
+        if k in SKIP_KEYS: continue
         if isinstance(v, dict) and "value" not in v:
             flatten(f"{prefix}-{k}", v, out)
         else:
             out[f"{prefix}-{k}"] = resolve(v["value"]) if isinstance(v, dict) else v
 
 flat = {}
-for section in ("color", "typography", "spacing", "motion"):
+for section in ("color", "typography", "spacing", "shadow", "motion", "alias"):
     if section in tok:
-        flatten(section.replace("color", "color"), tok[section], flat)
+        flatten(section, tok[section], flat)
 # rename to css-var style: color-brand-buy -> --color-buy handled by explicit map below
 css_vars = {}
 for k, v in flat.items():
@@ -35,7 +37,12 @@ for k, v in flat.items():
     # collapse color.brand.X -> --color-X ; color.bg.X -> --bg-X (match existing web names)
     name = name.replace("--color-brand-", "--color-").replace("--color-bg-", "--bg-") \
                .replace("--color-border-", "--border-").replace("--color-text-", "--text-") \
-               .replace("--color-exceptions-", "--x-")
+               .replace("--color-exceptions-", "--x-") \
+               .replace("--spacing-radius-", "--radius-") \
+               .replace("--spacing-control-height-", "--control-h-") \
+               .replace("--spacing-padding-", "--pad-") \
+               .replace("--motion-transition-", "--transition-") \
+               .replace("--shadow-", "--shadow-").replace("--alias-", "--")
     css_vars[name] = v
 
 with open(os.path.join(OUT, "tokens.css"), "w") as f:
