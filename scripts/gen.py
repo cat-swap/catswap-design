@@ -47,6 +47,13 @@ for k, v in flat.items():
 
 with open(os.path.join(OUT, "tokens.css"), "w") as f:
     f.write("/* GENERATED from tokens/tokens.json — DO NOT EDIT BY HAND (run scripts/sync.sh) */\n")
+    # @property registrations: prevent build-time stripping of custom
+    # properties (lightningcss/cssnano drop unreferenced vars), and make
+    # value changes always render — the visual-regression gate can then
+    # actually catch color regressions (K3 #292 review finding).
+    for name, v in sorted(css_vars.items()):
+        if v.startswith("#") or v.startswith("rgba"):
+            f.write(f"@property {name} {{ syntax: '<color>'; inherits: true; initial-value: {v}; }}\n")
     f.write(":root {\n")
     for k in sorted(css_vars):
         f.write(f"  {k}: {css_vars[k]};\n")

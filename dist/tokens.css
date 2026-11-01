@@ -1,4 +1,40 @@
 /* GENERATED from tokens/tokens.json — DO NOT EDIT BY HAND (run scripts/sync.sh) */
+@property --bg-active { syntax: '<color>'; inherits: true; initial-value: #3C3C3C; }
+@property --bg-card { syntax: '<color>'; inherits: true; initial-value: #000000; }
+@property --bg-hover { syntax: '<color>'; inherits: true; initial-value: #2E2E2E; }
+@property --bg-input { syntax: '<color>'; inherits: true; initial-value: #1A1A1A; }
+@property --bg-primary { syntax: '<color>'; inherits: true; initial-value: #2E2E2E; }
+@property --bg-quaternary { syntax: '<color>'; inherits: true; initial-value: #2E2E2E; }
+@property --bg-secondary { syntax: '<color>'; inherits: true; initial-value: #000000; }
+@property --bg-tertiary { syntax: '<color>'; inherits: true; initial-value: #1A1A1A; }
+@property --bg-tooltip { syntax: '<color>'; inherits: true; initial-value: #2E2E2E; }
+@property --border-active { syntax: '<color>'; inherits: true; initial-value: #4A4A4A; }
+@property --border-hover { syntax: '<color>'; inherits: true; initial-value: #3C3C3C; }
+@property --border-primary { syntax: '<color>'; inherits: true; initial-value: #2E2E2E; }
+@property --border-secondary { syntax: '<color>'; inherits: true; initial-value: #2E2E2E; }
+@property --color-buy { syntax: '<color>'; inherits: true; initial-value: #02C976; }
+@property --color-buy-bg { syntax: '<color>'; inherits: true; initial-value: rgba(2, 201, 118, 0.08); }
+@property --color-buy-hover { syntax: '<color>'; inherits: true; initial-value: #02A566; }
+@property --color-buy-light { syntax: '<color>'; inherits: true; initial-value: rgba(2, 201, 118, 0.1); }
+@property --color-danger { syntax: '<color>'; inherits: true; initial-value: #EB4B6D; }
+@property --color-danger-hover { syntax: '<color>'; inherits: true; initial-value: #D13A5F; }
+@property --color-info { syntax: '<color>'; inherits: true; initial-value: #3398DB; }
+@property --color-sell { syntax: '<color>'; inherits: true; initial-value: #EB4B6D; }
+@property --color-sell-bg { syntax: '<color>'; inherits: true; initial-value: rgba(235, 75, 109, 0.08); }
+@property --color-sell-hover { syntax: '<color>'; inherits: true; initial-value: #D13A5F; }
+@property --color-sell-light { syntax: '<color>'; inherits: true; initial-value: rgba(235, 75, 109, 0.1); }
+@property --color-success { syntax: '<color>'; inherits: true; initial-value: #02C976; }
+@property --color-success-hover { syntax: '<color>'; inherits: true; initial-value: #02A566; }
+@property --color-warning { syntax: '<color>'; inherits: true; initial-value: #F0B90B; }
+@property --danger { syntax: '<color>'; inherits: true; initial-value: #EB4B6D; }
+@property --success { syntax: '<color>'; inherits: true; initial-value: #02C976; }
+@property --text-muted { syntax: '<color>'; inherits: true; initial-value: #474D57; }
+@property --text-primary { syntax: '<color>'; inherits: true; initial-value: #EAECEF; }
+@property --text-secondary { syntax: '<color>'; inherits: true; initial-value: #848E9C; }
+@property --text-tertiary { syntax: '<color>'; inherits: true; initial-value: #5E6673; }
+@property --x-coin-avax { syntax: '<color>'; inherits: true; initial-value: #E84142; }
+@property --x-coin-usdt { syntax: '<color>'; inherits: true; initial-value: #26A17B; }
+@property --x-solana-gradient { syntax: '<color>'; inherits: true; initial-value: #14F195 -> #9945FF; }
 :root {
   --bg-active: #3C3C3C;
   --bg-card: #000000;
