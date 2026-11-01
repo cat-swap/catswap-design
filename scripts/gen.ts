@@ -63,6 +63,18 @@ for (const [name, v] of Object.entries(cssVars).sort(([a], [b]) => a.localeCompa
 css += ":root {\n";
 for (const name of Object.keys(cssVars).sort()) css += `  ${name}: ${cssVars[name]};\n`;
 css += "}\n";
+// dark overrides from color._dark
+if (tok.color && (tok.color as any)._dark) {
+  const darkVars: Record<string, string> = {};
+  for (const fam of ["bg", "border", "text"]) {
+    for (const [k, v] of Object.entries((tok.color as any)._dark[fam] ?? {})) {
+      darkVars[`--${fam}-${k}`] = (v as any).value;
+    }
+  }
+  css += `[data-theme="dark"] {\n`;
+  for (const name of Object.keys(darkVars).sort()) css += `  ${name}: ${darkVars[name]};\n`;
+  css += `}\n`;
+}
 writeFileSync(join(OUT, "tokens.css"), css);
 writeFileSync(join(OUT, "tokens.kmp.json"), JSON.stringify(Object.fromEntries(Object.entries(cssVars).map(([k, v]) => [k.replace(/^--/, ""), v])), null, 2));
 
