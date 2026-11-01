@@ -49,3 +49,41 @@ with open(os.path.join(OUT, "tokens.kmp.json"), "w") as f:
     json.dump({k.lstrip("-"): v for k, v in css_vars.items()}, f, indent=2)
 
 print(f"OK: dist/tokens.css ({len(css_vars)} vars) + dist/tokens.kmp.json")
+
+# ---- Infima (Docusaurus) flavor: map canonical tokens into --ifm-* system ----
+# Shade ladders are derived from the canonical buy green (documented derivation,
+# matches the shade family previously hand-maintained in catswap-docs).
+INFIMA = f"""/* GENERATED from tokens/tokens.json — DO NOT EDIT BY HAND (run scripts/sync.sh) */
+:root {{
+  --ifm-color-primary: {css_vars['--color-buy']};
+  --ifm-color-primary-dark: {css_vars['--color-buy-hover']};
+  --ifm-color-primary-darker: #02935b;
+  --ifm-color-primary-darkest: #016e44;
+  --ifm-color-primary-light: #17d083;
+  --ifm-color-primary-lighter: #43db91;
+  --ifm-color-primary-lightest: #86ebc0;
+  --ifm-color-primary-contrast-foreground: #ffffff;
+  --ifm-color-primary-contrast-background: #045c39;
+  --ifm-color-success: {css_vars['--color-buy']};
+  --ifm-color-danger: {css_vars['--color-sell']};
+  --ifm-color-warning: {css_vars['--color-warning']};
+  --ifm-color-info: {css_vars['--color-info']};
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(2, 201, 118, 0.10);
+}}
+[data-theme='dark'] {{
+  --ifm-color-primary: {css_vars['--color-buy']};
+  --ifm-color-primary-dark: #03b56e;
+  --ifm-color-primary-darker: #02935b;
+  --ifm-color-primary-darkest: #016e44;
+  --ifm-color-primary-light: #17d083;
+  --ifm-color-primary-lighter: #43db91;
+  --ifm-color-primary-lightest: #86ebc0;
+  --ifm-color-success: {css_vars['--color-buy']};
+  --ifm-color-danger: {css_vars['--color-sell']};
+}}
+"""
+with open(os.path.join(OUT, "tokens.infima.css"), "w") as f:
+    f.write(INFIMA)
+print("OK: dist/tokens.infima.css")
+

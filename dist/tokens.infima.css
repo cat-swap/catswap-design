@@ -1,0 +1,29 @@
+/* GENERATED from tokens/tokens.json — DO NOT EDIT BY HAND (run scripts/sync.sh) */
+:root {
+  --ifm-color-primary: #02C976;
+  --ifm-color-primary-dark: #02A566;
+  --ifm-color-primary-darker: #02935b;
+  --ifm-color-primary-darkest: #016e44;
+  --ifm-color-primary-light: #17d083;
+  --ifm-color-primary-lighter: #43db91;
+  --ifm-color-primary-lightest: #86ebc0;
+  --ifm-color-primary-contrast-foreground: #ffffff;
+  --ifm-color-primary-contrast-background: #045c39;
+  --ifm-color-success: #02C976;
+  --ifm-color-danger: #EB4B6D;
+  --ifm-color-warning: #F0B90B;
+  --ifm-color-info: #3398DB;
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(2, 201, 118, 0.10);
+}
+[data-theme='dark'] {
+  --ifm-color-primary: #02C976;
+  --ifm-color-primary-dark: #03b56e;
+  --ifm-color-primary-darker: #02935b;
+  --ifm-color-primary-darkest: #016e44;
+  --ifm-color-primary-light: #17d083;
+  --ifm-color-primary-lighter: #43db91;
+  --ifm-color-primary-lightest: #86ebc0;
+  --ifm-color-success: #02C976;
+  --ifm-color-danger: #EB4B6D;
+}
