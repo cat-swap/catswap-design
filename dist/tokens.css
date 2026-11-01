@@ -34,7 +34,6 @@
 @property --text-tertiary { syntax: '<color>'; inherits: true; initial-value: #5E6673; }
 @property --x-coin-avax { syntax: '<color>'; inherits: true; initial-value: #E84142; }
 @property --x-coin-usdt { syntax: '<color>'; inherits: true; initial-value: #26A17B; }
-@property --x-solana-gradient { syntax: '<color>'; inherits: true; initial-value: #14F195 -> #9945FF; }
 :root {
   --bg-active: #3C3C3C;
   --bg-card: #000000;
