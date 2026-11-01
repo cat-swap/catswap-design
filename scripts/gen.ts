@@ -1,36 +1,51 @@
-#!/usr/bin/env node
-/** Generate per-platform token files from tokens/tokens.json (the only source of truth). */
+#!/usr/bin/env npx tsx
+/** Generate per-platform token files from tokens/tokens.json (the only source of truth).
+ *  Typed: the token file shape is checked at compile time — rename/remove a
+ *  field in tokens.json and this fails typecheck instead of silently breaking
+ *  three downstream consumers. */
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
+interface TokenLeaf { value: string; alias?: boolean; note?: string }
+type TokenNode = TokenLeaf | { [k: string]: TokenNode | TokenLeaf };
+interface TokenFile {
+  meta: { name: string; version: string; canonical: boolean; authority: string; consumers: string[] };
+  color: { brand: Record<string, TokenLeaf>; bg: Record<string, TokenLeaf>; border: Record<string, TokenLeaf>; text: Record<string, TokenLeaf>; exceptions: Record<string, TokenLeaf> };
+  typography: Record<string, Record<string, string> | Record<string, string>>;
+  spacing: Record<string, Record<string, string>>;
+  shadow: Record<string, string>;
+  motion: { transition: Record<string, string>; rule: string };
+  alias: Record<string, TokenLeaf>;
+}
+
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
-const tok = JSON.parse(readFileSync(join(ROOT, "tokens", "tokens.json"), "utf8"));
+const tok: TokenFile = JSON.parse(readFileSync(join(ROOT, "tokens", "tokens.json"), "utf8"));
 const OUT = join(ROOT, "dist");
 mkdirSync(OUT, { recursive: true });
 
-function resolve(v, depth = 0) {
+function resolve(v: string, depth = 0): string {
   if (depth > 5) return v;
   const m = /^\{(.+)\}$/.exec(v);
   if (!m) return v;
-  let node = tok;
+  let node: any = tok;
   for (const part of m[1].split(".")) node = node[part];
-  return resolve(node.value ?? node, depth + 1);
+  return resolve((node as TokenLeaf).value ?? String(node), depth + 1);
 }
 
 const SKIP = new Set(["meta", "note", "rule"]);
-function flatten(prefix, node, out) {
+function flatten(prefix: string, node: Record<string, any>, out: Record<string, string>): void {
   for (const [k, v] of Object.entries(node)) {
     if (SKIP.has(k)) continue;
     if (typeof v === "object" && v !== null && !("value" in v)) flatten(`${prefix}-${k}`, v, out);
     else out[`${prefix}-${k}`] = typeof v === "object" ? resolve(v.value) : v;
   }
 }
-const flat = {};
+const flat: Record<string, string> = {};
 for (const section of ["color", "typography", "spacing", "shadow", "motion", "alias"]) {
-  if (section in tok) flatten(section, tok[section], flat);
+  if (section in tok) flatten(section, (tok as any)[section], flat);
 }
-const cssVars = {};
+const cssVars: Record<string, string> = {};
 for (const [k, v] of Object.entries(flat)) {
   cssVars["--" + k
     .replace("color-brand-", "color-").replace("color-bg-", "bg-")

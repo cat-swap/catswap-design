@@ -1,0 +1,26 @@
+{
+  "name": "catswap-design",
+  "version": "1.0.0",
+  "description": "CatSwap \u7684\u8bbe\u8ba1\u8bed\u8a00\u6b63\u672c\u4ed3\u2014\u2014**\u591a\u7aef\u5355\u6e90**\uff1a\u524d\u7aef\uff08web\uff09\u3001\u6587\u6863\u7ad9\uff08docs\uff09\u3001\u672a\u6765\u7684\u79fb\u52a8\u7aef\u5168\u90e8\u4ece\u540c\u4e00\u4efd token \u6d88\u8d39\u3002",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cat-swap/catswap-design.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cat-swap/catswap-design/issues"
+  },
+  "homepage": "https://github.com/cat-swap/catswap-design#readme",
+  "devDependencies": {
+    "@types/node": "^26.6.6",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2"
+  },
+  "type": "module"
+}
