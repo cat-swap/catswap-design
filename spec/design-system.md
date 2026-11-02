@@ -730,8 +730,8 @@ We want a **design system** that can continue to look like OKX correctly as the 
 
 ## 组件规范增补（2026-10-08，boss UI 一致性专项）
 
-### 双色族（刻意设计，勿"统一"）
-- **K线/涨跌语义**：`var(--color-buy)` #0ECB81 / `var(--color-sell)` #F6465D —— 蜡烛、涨跌百分比、多空标识；
+### 双色族（10/27 起两族值统一，结构留档）
+- **K线/涨跌语义**：`var(--color-buy)` / `var(--color-sell)` —— 蜡烛、涨跌百分比、多空标识；**当前解析 = #02C976 / #EB4B6D**（立典时（10/07）为 #0ECB81/#F6465D，随 D0001 与 CTA 族并入同一对 canonical tokens；代码侧旧值 0 残留）。
 - **CTA 按钮激活态**：#02C976（Buy/Open）/ #EB4B6D（Sell/Close）—— canonical tokens（boss 10/27 拍板红 #EB4B6D；hover #02A566/#D13A5F）。
 
 ### 下拉面板（TradingPairDropdown 定型）
